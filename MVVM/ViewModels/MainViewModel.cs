@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using InyeccionDeDependencias3.Misc.Interfaces;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace InyeccionDeDependencias3.MVVM.ViewModels
@@ -7,7 +8,8 @@ namespace InyeccionDeDependencias3.MVVM.ViewModels
     {
         //Propiedades privadas
         private ViewModelBase _modeloDeVista = new HomeViewModel();
-        private string _subtitulo = "Subtítulo por defecto";
+        private string _subtitulo = "";
+        private readonly IMessageWriter _messageWriter;
 
         //Propiedades públicas
         public ViewModelBase ModeloDeVista
@@ -35,8 +37,9 @@ namespace InyeccionDeDependencias3.MVVM.ViewModels
         public ICommand ShowCustomerViewCommand { get; }
 
         //Inicialización de comandos
-        public MainViewModel()
+        public MainViewModel(IMessageWriter messageWriter)
         {
+            _messageWriter = messageWriter;
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
             ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
 
@@ -47,15 +50,15 @@ namespace InyeccionDeDependencias3.MVVM.ViewModels
         //Delegados
         private void ExecuteShowHomeViewCommand(object? obj)
         {
+            _messageWriter.Write($"HOME. La hora exacta: {DateTimeOffset.Now}");
             ModeloDeVista = new HomeViewModel();
             Subtitulo = "Este es el subtítulo de HOME";
-            Trace.WriteLine("Se lee delegado HOME");
         }
         private void ExecuteShowCustomerViewCommand(object obj)
         {
+            _messageWriter.Write($"CUSTOMER. La hora exacta: {DateTimeOffset.Now}");
             ModeloDeVista = new CustomerViewModel();
             Subtitulo = "Este es el subtítulo de CUSTOMER";
-            Trace.WriteLine("Se lee delegado CUSTOMER");
         }
     }
 }

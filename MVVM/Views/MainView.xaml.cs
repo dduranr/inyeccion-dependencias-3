@@ -1,9 +1,4 @@
-﻿using InyeccionDeDependencias3.MVVM.ViewModels;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Interop;
+﻿using System.Windows;
 
 namespace InyeccionDeDependencias3.MVVM.Views
 {

@@ -1,4 +1,5 @@
 ﻿using InyeccionDeDependencias3.Misc.Interfaces;
+using System.Diagnostics;
 
 namespace InyeccionDeDependencias3.Misc
 {
@@ -6,7 +7,7 @@ namespace InyeccionDeDependencias3.Misc
     {
         public void Write(string message)
         {
-            Console.WriteLine($"El mensaje es: \"{message}\")");
+            Trace.WriteLine($"El mensaje es: \"{message}\")");
         }
     }
 }
